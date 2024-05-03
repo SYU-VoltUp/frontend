@@ -1,4 +1,4 @@
-function Main() {
+function ChargingList() {
     return (
         <div>
             현위치 주변 충전소 목록
@@ -12,4 +12,4 @@ function Main() {
     )
 }
 
-export default Main
+export default ChargingList;

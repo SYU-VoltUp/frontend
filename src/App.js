@@ -1,21 +1,19 @@
 import './App.css';
-import Kakaomap from './components/Kakaomap';
 import Main from './components/Main';
+import List from './components/List';
+import ChargingList from './components/ChargingList';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
-      <Kakaomap/>
-      <Main/>
-      {/* <BrowserRouter>
+      <BrowserRouter>
         <Routes>
-          <Route path='/main' element={<>
-            <Kakaomap/>
-            <Main/>
-          </>}>
-          </Route>
+          <Route path='/' element={<Main />}/>
+          <Route path='/list' element={<List />}/>
+          <Route path='/charginglist' element={<ChargingList />}/>
         </Routes>
-          </BrowserRouter> */}
+      </BrowserRouter>
     </div>
   );
 }
