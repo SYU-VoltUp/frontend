@@ -36,12 +36,6 @@
   background-size: 13px;
   padding-right: 20px;
 }
-.Filter {
-  position: fixed;
-  height: 30px;
-  margin: 89px 20px;
-  border-radius: 10px;
-}
 .box {
   text-align: center;
   border-style: solid;
@@ -85,42 +79,35 @@
 .Kakaomap {
   position: fixed;
 }
-/*.App {
-  text-align: center;
+
+.speed-button {
+  width: 62px;
+  height: 59px;
+  margin-right: 13px;
+  border: none;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.option-row {
+  position: fixed;
+  top: 668px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.option-container {
+  position: fixed;
+  width: 394px;
+  height: 187px;
+  top: 598px;
+  left: 0px;
+  background-color: white;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.apply-button {
+  position: fixed;
+  width: 393px;
+  height: 67px;
+  top: 785px;
+  left: 0px;
+  background-color:#073DFF;
+  border: none;
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-*/

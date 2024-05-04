@@ -1,15 +1,19 @@
+import FilterBtn from './Filter/FilterBtn';
+import SpeedBtn from './Filter/SpeedBtn';
+import ChargeBtn from './Filter/ChargeBtn';
+import ParkingBtn from './Filter/ParkingBtn';
 import buttonImg from '../images/buttonImg.png'
 import filterImg from '../images/filterImg.png'
 
-function Layout() {
+function Filter() {
     return (
-        <div className="Filter">
-            <button className="Button" style={{backgroundImage: `url(${filterImg})`, backgroundPosition: '10px 5.5px', width:'75px'}}><div style={{marginLeft:'20px'}}>필터</div></button>
-            <button className="Button" style={{backgroundImage: `url(${buttonImg})`, marginLeft:'14px'}}>충전속도</button>
-            <button className="Button" style={{backgroundImage: `url(${buttonImg})`, marginLeft:'3px'}}>충전요금</button>
-            <button className="Button" style={{backgroundImage: `url(${buttonImg})`, marginLeft:'3px'}}>주차요금</button>
+        <div style={{position:'fixed', top:'89px'}}>
+            <FilterBtn style={{position:'fixed', left:'20px', backgroundImage: `url(${filterImg})`, backgroundPosition: '10px 5.5px', width:'75px'}}/>
+            <SpeedBtn style={{position:'fixed', left:'111px', backgroundImage: `url(${buttonImg})`}} />
+            <ChargeBtn style={{position:'fixed', left:'200px', backgroundImage: `url(${buttonImg})`}}/>
+            <ParkingBtn style={{position:'fixed', left:'289px', backgroundImage: `url(${buttonImg})`}}/>
         </div>
     )
 }
 
-export default Layout
+export default Filter
