@@ -1,5 +1,10 @@
+.Kakaomap {
+  position: fixed;
+  z-index: 1;
+}
 .Search {
   position: fixed;
+  z-index: 2;
   text-align: center;
   border-style: solid;
   border-width: thin;
@@ -14,6 +19,7 @@
 }
 .SearchBtn {
   position: fixed;
+  z-index: 2;
   margin: 33px 340px;
   background-position: 10px 5px;
   width: 24px;
@@ -25,14 +31,12 @@
 }
 .Button {
   background-color:white;
-  width: 84px;
   height: 30px; 
   border-radius: 10px;
   border: none;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   font-size: 14px; 
   background-repeat: no-repeat;
-  background-position: 66px 12px;
   background-size: 13px;
   padding-right: 20px;
 }
@@ -45,9 +49,9 @@
   background-color: aquamarine;
   padding-right: 100px
 }
-
 .OpenList {
-  position: absolute;
+  position: fixed;
+  z-index: 2;
   border-radius: 10px;
   border: none;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
@@ -59,7 +63,8 @@
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .Location {
-  position: absolute;
+  position: fixed;
+  z-index: 2;
   border-radius: 50%;
   border: none;
   width: 39px;
@@ -69,29 +74,16 @@
   background: #FFFFFF;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-
-.Charging {
-  border-style: solid;
-  border-width: thin;
-  border-radius: 5px;
-}
-
-.Kakaomap {
-  position: fixed;
-}
-
 .speed-button {
   width: 62px;
   height: 59px;
   margin-right: 13px;
   border: none;
 }
-
 .option-row {
   position: fixed;
   top: 668px;
 }
-
 .option-container {
   position: fixed;
   width: 394px;
@@ -100,7 +92,6 @@
   left: 0px;
   background-color: white;
 }
-
 .apply-button {
   position: fixed;
   width: 393px;

@@ -17,7 +17,7 @@ function SearchBox() {
 
     return(
         <div>
-            <form onSubmit={handleSearchSubmit}>
+            <form onSubmit={handleSearchSubmit} style={{position:'fixed', zIndex:'2'}}>
                 <input
                     type='search' 
                     id="searchInput" 
