@@ -10,12 +10,11 @@ function List() {
   
   // axios
   const [stations, setStations] = useState(null);
-  // const [chargers, seChargers] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchStations = async () => {
       try {
         setError(null);
         setStations(null);
@@ -23,14 +22,13 @@ function List() {
         
         const response = await axios.get('v1/stations/AH000004-02');
 
-        setStations(response.data); // 데이터는 response.data 안에 들어있습니다.
+        setStations(response.data);
       } catch (e) {
         setError(e);
       }
       setLoading(false);
     };
-
-    fetchUsers();
+    fetchStations();
   }, []);
 
   if (loading) return <div>로딩중..</div>;

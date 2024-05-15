@@ -79,6 +79,7 @@
   height: 59px;
   margin-right: 13px;
   border: none;
+  background-color: white;
 }
 .option-row {
   position: fixed;
@@ -91,6 +92,7 @@
   top: 598px;
   left: 0px;
   background-color: white;
+  z-index: 3;
 }
 .apply-button {
   position: fixed;
@@ -101,4 +103,46 @@
   background-color:#073DFF;
   border: none;
   color: white;
+}
+.detail-container {
+  position: fixed;
+  width: 394px;
+  height: 199px;
+  top: 653px;
+  left: 0px;
+  padding-left: 15px;
+  background-color: white;
+  z-index: 3;
+}
+.detail {
+  position: fixed;
+  width: 363px;
+  height: 70px;
+  top: 797px;
+  left: 15px;
+  background-color: #D9D9D9;
+  z-index:3;
+}
+.connector-container { 
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 7px;
+}
+.connector-box {
+  border: none;
+  border-radius: 5px;
+  background-color: #D9D9D9;
+  padding: 3px;
+  margin-right: 10px;
+  font-size: 13px;
+}
+.modal {
+  border: none;
+  position: fixed; 
+  left: 350px;
+  top: 30px;
+  background-repeat: no-repeat;
+  background-color: white;
+  width: 20px;
+  height: 20px;
 }

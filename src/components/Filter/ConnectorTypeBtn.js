@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function ConnectorType({style}) {
+function ConnectorTypeBtn({style}) {
     const [showConnectorTypeOptions, setShowConnectorTypeOptions] = useState(false);
     const [selectedConnectorType, setSelectedConnectorType] = useState(null);
 
@@ -29,4 +29,4 @@ function ConnectorType({style}) {
         </div>
     )
 }
-export default ConnectorType;
+export default ConnectorTypeBtn;
