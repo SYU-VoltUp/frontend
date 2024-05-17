@@ -81,6 +81,13 @@
   border: none;
   background-color: white;
 }
+.speed-button.selected {
+  width: 62px;
+  height: 59px;
+  margin-right: 13px;
+  border: none;
+  background-color: #073DFF; /* 원하는 색상으로 변경 가능 */
+}
 .option-row {
   position: fixed;
   top: 668px;
