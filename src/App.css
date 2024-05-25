@@ -86,7 +86,21 @@
   height: 59px;
   margin-right: 13px;
   border: none;
-  background-color: #073DFF; /* 원하는 색상으로 변경 가능 */
+  background-color: #073DFF;
+}
+.type-button {
+  width: 62px;
+  height: 59px;
+  margin-right: 13px;
+  border: none;
+  background-color: white;
+}
+.type-button.selected {
+  width: 62px;
+  height: 59px;
+  margin-right: 13px;
+  border: none;
+  background-color: #073DFF;
 }
 .option-row {
   position: fixed;

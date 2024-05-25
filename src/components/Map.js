@@ -14,8 +14,8 @@ function Map() {
   const [selectedStation, setSelectedStation] = useState(null);
   const [showStationDetail, setShowStationDetail] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedSpeeds, setSelectedSpeeds] = useState([]); // selectedSpeeds 상태 추가
-
+  const [selectedSpeeds, setSelectedSpeeds] = useState([]);
+  const [selectedTypes, setSelectedTypes] = useState([]);
   const options = {
     enableHighAccuracy: true,
     timeout: 5000,
@@ -43,37 +43,41 @@ function Map() {
       const options = { center: new kakao.maps.LatLng(location.lat, location.lng), level: 3 };
       const newMap = new kakao.maps.Map(container, options);
       setMap(newMap);
-      fetchStations(newMap, selectedSpeeds);
+      fetchStations(newMap, selectedSpeeds, selectedTypes);
     }
   }, [location]);
 
   // selectedSpeeds가 변경될 때 필터된 마커 표시
   useEffect(() => {
-    if (map) fetchStations(map, selectedSpeeds);
-  }, [selectedSpeeds, map]);
+    if (map) fetchStations(map, selectedSpeeds, selectedTypes);
+  }, [map, selectedSpeeds, selectedTypes]);
 
-  const fetchStations = (mapInstance, speeds) => {
+  const fetchStations = (mapInstance, speeds, types) => {
     const bounds = mapInstance.getBounds();
     const swLatLng = bounds.getSouthWest();
     const neLatLng = bounds.getNorthEast();
+    
+    const params = {
+      bounds: `${swLatLng.getLat()},${swLatLng.getLng()},${neLatLng.getLat()},${neLatLng.getLng()}`,
+      types: types.length ? types.join(',') : null,
+      outputs: speeds.length ? speeds.join(',') : null
+    };
+    console.log('API 요청 파라미터:', params);
 
-    axios.get('v1/stations', {
-      params: {
-        bounds: `${swLatLng.getLat()},${swLatLng.getLng()},${neLatLng.getLat()},${neLatLng.getLng()}`,
-        outputs: speeds.length ? speeds.join(',') : null
-      }
-    }).then(response => {
+    axios.get('https://www.syu-voltup.com/v1/stations', {params}).then(response => {
+      console.log('API 응답: ', response.data.data);
+      
       const newMarkers = response.data.data.map(station => {
         const marker = new kakao.maps.Marker({
           map: mapInstance,
           position: new kakao.maps.LatLng(station.lat, station.lng)
         });
-
+  
         kakao.maps.event.addListener(marker, 'click', () => {
           setShowStationDetail(true);
           setSelectedStation(station);
         });
-
+  
         return marker;
       });
       setMarkers(prevMarkers => {
@@ -102,25 +106,29 @@ function Map() {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  // SpeedBtn 컴포넌트에서 호출할 콜백 함수
+  // Filter 컴포넌트로 전달할 함수
   const handleSpeedChange = (speeds) => {
     setSelectedSpeeds(speeds);
     console.log('선택된 속도:', speeds);
   };
-
+  const handleConnectorChange = (types) => {
+    setSelectedTypes(types);
+    console.log('선택된 커넥터 타입:', types);
+  };
+  
   return (
     <div id="map" style={{ width: "393px", height: "852px" }}>
-      <LocationBtn onClick={btnOnClick}/>
-      <Filter onSpeedChange={handleSpeedChange} /> {/* Filter 컴포넌트에 handleSpeedChange를 prop으로 전달 */}
+      <LocationBtn onClick={btnOnClick} />
+      <Filter onSpeedChange={handleSpeedChange} onConnectorChange={handleConnectorChange} />
       {showStationDetail && (
         <div className='detail-container'>
-          <button className='modal' onClick={openModal} style={{backgroundImage: `url(${upButtonImg})`, left: '350px', top: '660px'}}/>
+          <button className='modal' onClick={openModal} style={{ backgroundImage: `url(${upButtonImg})`, left: '350px', top: '660px' }} />
           <Modal isOpen={isModalOpen} closeModal={closeModal} />
           {selectedStation && (
             <>
               {selectedStation.stationId}
-              <h3 style={{fontSize:'20px'}}>{selectedStation.name}</h3>
-              <div style={{fontSize:'15px'}}>{selectedStation.address}</div>
+              <h3 style={{ fontSize: '20px' }}>{selectedStation.name}</h3>
+              <div style={{ fontSize: '15px' }}>{selectedStation.address}</div>
               <div className='connector-container'>
                 {selectedStation.connectorTypes.map((connector, index) => (
                   <div key={index} className='connector-box'>{connector}</div>
