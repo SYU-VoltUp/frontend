@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import LocationBtn from './LocationBtn';
 import Filter from './Filter'; // Filter 컴포넌트 임포트
+import SearchBox from './SearchBox'; // SearchBox 컴포넌트 임포트
 import axios from 'axios';
 import Modal from './Modal';
 import upButtonImg from '../images/upButtonImg.png';
@@ -16,6 +17,7 @@ function Map() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedSpeeds, setSelectedSpeeds] = useState([]);
   const [selectedTypes, setSelectedTypes] = useState([]);
+  const [searchKeyword, setSearchKeyword] = useState('');
   const options = {
     enableHighAccuracy: true,
     timeout: 5000,
@@ -43,24 +45,41 @@ function Map() {
       const options = { center: new kakao.maps.LatLng(location.lat, location.lng), level: 3 };
       const newMap = new kakao.maps.Map(container, options);
       setMap(newMap);
-      fetchStations(newMap, selectedSpeeds, selectedTypes);
+      fetchStations(newMap);
+      
+      // bounds_changed 이벤트 리스너 추가
+      kakao.maps.event.addListener(newMap, 'bounds_changed', () => {
+        fetchStations(newMap);
+      });
     }
   }, [location]);
 
-  // selectedSpeeds가 변경될 때 필터된 마커 표시
+  // 필터가 변경될 때 마커 갱신
   useEffect(() => {
-    if (map) fetchStations(map, selectedSpeeds, selectedTypes);
-  }, [map, selectedSpeeds, selectedTypes]);
+    if (map) fetchStations(map);
+  }, [map, selectedSpeeds, selectedTypes, searchKeyword]);
 
-  const fetchStations = (mapInstance, speeds, types) => {
+  // 검색 상태 업데이트 함수
+  const handleSearchInputChange = (event) => {
+    setSearchKeyword(event.target.value);
+  };
+
+  // 검색 제출 함수
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    if (map) fetchStations(map);
+  };
+
+  const fetchStations = (mapInstance) => {
     const bounds = mapInstance.getBounds();
     const swLatLng = bounds.getSouthWest();
     const neLatLng = bounds.getNorthEast();
     
     const params = {
       bounds: `${swLatLng.getLat()},${swLatLng.getLng()},${neLatLng.getLat()},${neLatLng.getLng()}`,
-      types: types.length ? types.join(',') : null,
-      outputs: speeds.length ? speeds.join(',') : null
+      types: selectedTypes.length ? selectedTypes.join(',') : null,
+      outputs: selectedSpeeds.length ? selectedSpeeds.join(',') : null,
+      keyword: searchKeyword || null,
     };
     console.log('API 요청 파라미터:', params);
 
@@ -120,6 +139,11 @@ function Map() {
     <div id="map" style={{ width: "393px", height: "852px" }}>
       <LocationBtn onClick={btnOnClick} />
       <Filter onSpeedChange={handleSpeedChange} onConnectorChange={handleConnectorChange} />
+      <SearchBox 
+        value={searchKeyword} 
+        onChange={handleSearchInputChange} 
+        onSubmit={handleSearchSubmit} 
+      />
       {showStationDetail && (
         <div className='detail-container'>
           <button className='modal' onClick={openModal} style={{ backgroundImage: `url(${upButtonImg})`, left: '350px', top: '660px' }} />

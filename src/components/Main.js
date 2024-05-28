@@ -2,7 +2,6 @@ import Filter from './Filter';
 import SearchBox from './SearchBox';
 import Kakaomap from './Kakaomap';
 import OpenListBtn from './OpenListBtn';
-import LocationBtn from './LocationBtn';
 
 function Main() {
     return (
