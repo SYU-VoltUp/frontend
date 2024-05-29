@@ -32,6 +32,20 @@ h1, p {
   align-items: center;
 }
 
+.bookmark-button,
+.close-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 15px; /* 버튼 간격 조정을 위해 마진 추가 */
+}
+
+.bookmark-icon,
+.close-icon {
+  width: 24px; /* 아이콘 크기 조정 */
+  height: 24px;
+}
+
 .header-bottom-line {
   width: 100%; /* 헤더의 가로 크기에 맞게 설정 */
   height: 1px;
@@ -51,9 +65,8 @@ h1, p {
   height: 852px;
 }
 
-/* App.css 파일 */
-
 /* 충전기 정보 스타일 */
+
 .charger-info {
   display: flex;
 }
@@ -83,3 +96,48 @@ h1, p {
   line-height: normal;
 }
 
+/* 충전기 박스 스타일 */
+
+.charging-box-category {
+  margin-bottom: 20px; /* 카테고리 간의 간격 조정 */
+}
+
+.charging-boxes {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.charging-box {
+  width: 175px;
+  height: 94px;
+  margin: 5px;
+  background-color: #EBEBEB;
+  border-radius: 8px;
+}
+
+.charger-id {
+  font-size: 50px;
+  font-weight: 700;
+  color: #777;
+  line-height: 94px;
+  text-align: center;
+}
+
+/* Go 버튼 스타일 */
+
+.go-button {
+  position: absolute; /* 절대 위치로 설정 */
+  z-index: 1000; /* 지도 위에 나타나도록 z-index 설정 */
+  bottom: 20px; /* 원하는 위치를 위해 조정 */
+  right: 20px; /* 원하는 위치를 위해 조정 */
+  width: 50px; /* 버튼 크기 조정 */
+  height: 50px; /* 버튼 크기 조정 */
+  background-color: transparent; /* 버튼 배경을 투명하게 설정 */
+  border-radius: 50%; /* 버튼을 동그란 모양으로 설정 */
+}
+
+.go-button img {
+  width: 100%; /* 이미지를 버튼 크기에 맞게 조정 */
+  height: 100%; /* 이미지를 버튼 크기에 맞게 조정 */
+  display: block; /* 이미지를 블록 요소로 설정하여 여백 제거 */
+}

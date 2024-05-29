@@ -1,9 +1,8 @@
-// Header.js
 import React from 'react';
-import bookmarkIcon from '../images/bookmark.svg'; // 북마크 아이콘 이미지 import
-import closeIcon from '../images/close.svg'; // 창 닫기 아이콘 이미지 import
+import bookmarkIcon from '../images/bookmark.svg';
+import closeIcon from '../images/close.svg';
 
-function Header({ chargingStation }) {
+function PinHeader({ chargingStation }) {
   return (
     <header className="header">
       <div className="header-content station-layout">
@@ -34,4 +33,4 @@ function Header({ chargingStation }) {
   );
 }
 
-export default Header;
+export default PinHeader;
