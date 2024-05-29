@@ -1,7 +1,5 @@
-// Go.js
-
 import React from 'react';
-import goButtonIcon from '../images/go_button.svg'; // go_button 아이콘 이미지 import
+import goButtonIcon from '../images/go_button.svg';
 
 const Go = () => {
   return (

@@ -2,6 +2,7 @@ import Filter from './Filter';
 import SearchBox from './SearchBox';
 import Kakaomap from './Kakaomap';
 import OpenListBtn from './OpenListBtn';
+import PinApp from '../PinApp';
 
 function Main() {
     return (

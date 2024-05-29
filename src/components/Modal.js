@@ -1,4 +1,5 @@
-import buttonImg from '../images/buttonImg.png'
+import buttonImg from '../images/buttonImg.png';
+import PinApp from '../PinApp';
 
 function Modal({isOpen, closeModal}) {
     return(
@@ -22,6 +23,7 @@ function Modal({isOpen, closeModal}) {
             }}>
                 <button className='modal' onClick={closeModal} style={{backgroundImage: `url(${buttonImg})`}}/>
                 <div>충전소의 세부화면입니다.</div>
+                <PinApp />
             </div>
         </div>
     );
