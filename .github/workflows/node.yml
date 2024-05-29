@@ -1,0 +1,45 @@
+name: React CD with Docker
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup docker buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Docker login
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Docker build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/syu-voltup:frontend
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - name: Execute remote ssh
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SYU_HOST }}
+          username: ${{ secrets.SYU_USERNAME }}
+          key: ${{ secrets.SYU_KEY }}
+          port: ${{ secrets.SYU_PORT }}
+          script: |
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/syu-voltup:frontend
+            cd syu_voltup_deploy
+            docker compose up -d nginx
