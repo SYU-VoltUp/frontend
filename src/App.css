@@ -126,7 +126,7 @@
   color: white;
 }
 .detail-container {
-  position: fixed;
+  position: absolute;
   width: 394px;
   height: 199px;
   top: 653px;
@@ -166,4 +166,181 @@
   background-color: white;
   width: 20px;
   height: 20px;
+}
+
+
+/* pin_App.css */
+.buttons {
+  display: flex;
+  align-items: center;
+}
+
+.bookmark-button,
+.close-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 15px; /* 버튼 간격 조정을 위해 마진 추가 */
+}
+
+.bookmark-icon,
+.close-icon {
+  width: 24px; /* 아이콘 크기 조정 */
+  height: 24px;
+}
+
+.header-bottom-line {
+  width: 100%; /* 헤더의 가로 크기에 맞게 설정 */
+  height: 1px;
+  background: #D0D0D0;
+  position: fixed; /* 헤더 아래에 고정됩니다. */
+  top: 50px; /* 헤더의 아래쪽에 위치하도록 조정하세요. */
+}
+
+/* 본문 스타일 */
+
+.main-content {
+  margin-top: 90px; /* 헤더의 높이만큼 여백 추가 */
+}
+
+.map {
+  width: 393px;
+  height: 852px;
+}
+
+/* 충전기 정보 스타일 */
+
+.charger-info {
+  display: flex;
+}
+
+.output,
+.type {
+  width: 108px;
+  height: 23px;
+  flex-shrink: 0;
+}
+
+.output {
+  color: #000;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.type {
+  color: #8C8C8C;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/* 충전기 박스 스타일 */
+
+.charging-box-category {
+  margin-bottom: 20px; /* 카테고리 간의 간격 조정 */
+}
+
+.charging-boxes {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.charging-box {
+  width: 175px;
+  height: 94px;
+  margin: 5px;
+  background-color: #EBEBEB;
+  border-radius: 8px;
+}
+
+.charger-id {
+  font-size: 50px;
+  font-weight: 700;
+  color: #777;
+  line-height: 94px;
+  text-align: center;
+}
+
+/* Go 버튼 스타일 */
+.go-button {
+  position: absolute; /* 절대 위치로 설정 */
+  z-index: 1000; /* 지도 위에 나타나도록 z-index 설정 */
+  bottom: 20px; /* 원하는 위치를 위해 조정 */
+  right: 20px; /* 원하는 위치를 위해 조정 */
+  width: 50px; /* 버튼 크기 조정 */
+  height: 50px; /* 버튼 크기 조정 */
+  background-color: transparent; /* 버튼 배경을 투명하게 설정 */
+  border-radius: 50%; /* 버튼을 동그란 모양으로 설정 */
+}
+
+.go-button img {
+  width: 100%; /* 이미지를 버튼 크기에 맞게 조정 */
+  height: 100%; /* 이미지를 버튼 크기에 맞게 조정 */
+  display: block; /* 이미지를 블록 요소로 설정하여 여백 제거 */
+}
+
+
+/* pinApp.css */
+button {
+  border: none; /* 테두리 제거 */
+  padding: 0; /* 내부 여백 제거 */
+  background: none; /* 배경 제거 */
+  cursor: pointer; /* 커서를 포인터로 변경 */
+}
+
+.header-bottom-line {
+  width: 100%;
+  height: 1px;
+  background-color: #D0D0D0; /* 회색 선(#D0D0D0)을 지정합니다. */
+}
+
+.go-button {
+  position: fixed;
+  bottom: 77px;
+  right: 40px;
+  width: 80px;
+  height: 78.613px;
+  flex-shrink: 0;
+}
+
+.go-button-icon {
+  width: 100%;
+  height: 100%;
+  fill: #FFF;
+}
+
+/* styles.css */
+.charging-stations {
+display: flex;
+flex-wrap: wrap;
+}
+
+.charging-box {
+width: 175px;
+height: 94px;
+flex-shrink: 0;
+border-radius: 8px;
+background: #EBEBEB;
+margin: 5px;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.charger-id {
+width: 121px;
+height: 60px;
+flex-shrink: 0;
+color: #777;
+font-family: Inter;
+font-size: 50px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+text-align: center;
 }

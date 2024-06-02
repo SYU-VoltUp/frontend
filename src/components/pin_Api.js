@@ -7,7 +7,7 @@ class Charger {
   }
 }
 
-class ChargingStation {
+class Station {
   constructor(data) {
     this.stationId = data.stationId;
     this.name = data.name;
@@ -21,15 +21,15 @@ class ChargingStation {
   }
 }
 
-async function fetchChargingStationData() {
+async function fetchStationData() {
   try {
     const response = await fetch('https://www.syu-voltup.com/v1/stations/ACAC0001');
     const data = await response.json();
-    return new ChargingStation(data.data);
+    return new Station(data.data);
   } catch (error) {
     console.error('API 호출 중 오류 발생:', error);
     throw new Error('API 호출 중 오류 발생');
   }
 }
 
-export { fetchChargingStationData };
+export { fetchStationData };
