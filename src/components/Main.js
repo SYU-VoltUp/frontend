@@ -2,11 +2,12 @@ import Filter from './Filter';
 import SearchBox from './SearchBox';
 import Kakaomap from './Kakaomap';
 import OpenListBtn from './OpenListBtn';
-import PinApp from '../PinApp';
+import "../App.css";
+
 
 function Main() {
     return (
-        <div style={{position:'fixed'}}>
+        <div>
             <Filter/>
             <SearchBox style={{position:'fixed', zIndex:'2'}}/>
             <OpenListBtn/>

@@ -43,6 +43,7 @@ function SpeedBtn({ style, onSpeedChange }) {
 
     return (
         <div>
+
             <button ref={buttonRef} onClick={handleSpeedButtonClick} className="Button" style={style}>충전속도</button>
 
             {showSpeedOptions && (

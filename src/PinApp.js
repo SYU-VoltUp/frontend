@@ -4,7 +4,7 @@ import PinMap from './components/pin_Map.js';
 import Header from './components/Header.js';
 import goButtonIcon from './images/go_button.svg';
 
-function PinApp() {
+function PinApp({closeModal}) {
   const [station, setStation] = useState(null);
 
   useEffect(() => {
@@ -39,8 +39,8 @@ function PinApp() {
   }, []);
 
   return (
-    <div className="app" style={{margin: '5px'}}>
-      <Header station={station} /> <hr/>
+    <div className="station-detail" style={{margin: '5px'}}>
+      <Header station={station} closeModal={closeModal} /> <hr/>
       <h3>충전기 정보</h3>
       {chargersByCategory.map((category, index) => (
         <div key={index} className="charging-box-category">
@@ -56,7 +56,13 @@ function PinApp() {
       </div>
       ))}
 
-      <img src={goButtonIcon} alt="Go Button" className="go-button" />
+      <img src={goButtonIcon} alt="Go Button" className="go-button" style={{
+        width: '15vw',
+        height: '15vw',
+        position: 'fixed',
+        bottom: '5vw',
+        right: '5vw',
+      }}/>
       <h2>지도</h2>
       <PinMap lat={station.lat} lng={station.lng} />
     </div>
