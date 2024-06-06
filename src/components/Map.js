@@ -5,7 +5,7 @@ import SearchBox from './SearchBox'; // SearchBox 컴포넌트 임포트
 import axios from 'axios';
 import Modal from './Modal';
 import upButtonImg from '../images/upButtonImg.png';
-import { fetchStationData } from './pin_Api';
+import { fetchStationData } from './DetailApi';
 const { kakao } = window;
 
 function Map() {
@@ -159,7 +159,6 @@ function Map() {
           <Modal isOpen={isModalOpen} closeModal={closeModal} stationId={selectedStation.stationId} />
           {selectedStation && (
             <>
-              {selectedStation.stationId}
               <h3 style={{ fontSize: '20px' }}>{selectedStation.name}</h3>
               <div style={{ fontSize: '15px' }}>{selectedStation.address}</div>
               <div className='connector-container'>

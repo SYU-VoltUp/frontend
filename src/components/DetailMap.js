@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-function PinMap({ lat, lng }) {
+function DetailMap({ lat, lng }) {
   const mapContainerRef = useRef(null);
 
   useEffect(() => {
@@ -42,4 +42,4 @@ function PinMap({ lat, lng }) {
   return <div ref={mapContainerRef} style={{ width: '100%', height: '400px' }}></div>;
 }
 
-export default PinMap;
+export default DetailMap;

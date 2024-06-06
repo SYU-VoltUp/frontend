@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
-import { fetchStationData } from './components/pin_Api.js';
-import PinMap from './components/pin_Map.js';
+import { fetchStationData } from './components/DetailApi.js';
+import DetailMap from './components/DetailMap.js';
 import Header from './components/Header.js';
-import goButtonIcon from './images/go_button.svg';
 
-function PinApp({ stationId }) {
+function Detail({ stationId }) {
   const [station, setStation] = useState(null);
 
   useEffect(() => {
@@ -46,9 +45,9 @@ function PinApp({ stationId }) {
       <h3>충전기 정보</h3>
       {chargersByCategory.map((category, index) => (
         <div key={index} className="charging-box-category">
-          <p className="charger-output">{category.output}</p>
-          <p className="charger-type">{category.type}</p>
-          <div className="charging-boxes" style={{ display: 'flex', flexWrap: 'wrap' }}>
+          충전 속도: {category.output}<br/>
+          커넥터 타입: {category.type}
+          <div className="charging-boxes">
             {category.chargers.map((charger, chargerIndex) => (
               <div key={chargerIndex} className="charging-box" style={{ width: '175px', height: '94px', margin: '5px', backgroundColor: '#EBEBEB', borderRadius: '8px' }}>
                 <p className="charger-id" style={{ fontSize: '50px', fontWeight: '700', color: '#777', lineHeight: '94px', textAlign: 'center' }}>{charger.chargerId.split('-')[1]}</p>
@@ -57,14 +56,13 @@ function PinApp({ stationId }) {
           </div>
         </div>
       ))}
-
-      <img src={goButtonIcon} alt="Go Button" className="go-button" />
-      <h2>지도</h2>
+      <br/>
+      <h3>지도</h3>
       <div id="map-container" style={{ width: '100%', height: '300px', position: 'relative' }}>
-        <PinMap lat={station.lat} lng={station.lng} />
+        <DetailMap lat={station.lat} lng={station.lng} />
       </div>
     </div>
   );
 }
 
-export default PinApp;
+export default Detail;

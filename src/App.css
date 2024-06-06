@@ -49,19 +49,6 @@
   background-color: aquamarine;
   padding-right: 100px
 }
-.OpenList {
-  position: fixed;
-  z-index: 2;
-  border-radius: 10px;
-  border: none;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  width: 49px;
-  height: 49px;
-  left: 26px;
-  top: 776px;
-  background: #FFFFFF;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
 .Location {
   position: fixed;
   z-index: 2;
@@ -162,10 +149,11 @@
   position: fixed; 
   left: 350px;
   top: 30px;
-  background-repeat: no-repeat;
-  background-color: white;
   width: 20px;
   height: 20px;
+  background-repeat: no-repeat;
+  background-color: white;
+  margin-top: 10px;
 }
 
 
@@ -173,20 +161,6 @@
 .buttons {
   display: flex;
   align-items: center;
-}
-
-.bookmark-button,
-.close-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin-right: 15px; /* 버튼 간격 조정을 위해 마진 추가 */
-}
-
-.bookmark-icon,
-.close-icon {
-  width: 24px; /* 아이콘 크기 조정 */
-  height: 24px;
 }
 
 .header-bottom-line {
@@ -243,6 +217,8 @@
 
 .charging-box-category {
   margin-bottom: 20px; /* 카테고리 간의 간격 조정 */
+  display: flex; 
+  flex-wrap: wrap;
 }
 
 .charging-boxes {
