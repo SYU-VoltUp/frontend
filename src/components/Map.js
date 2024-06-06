@@ -5,6 +5,7 @@ import SearchBox from './SearchBox'; // SearchBox 컴포넌트 임포트
 import axios from 'axios';
 import Modal from './Modal';
 import upButtonImg from '../images/upButtonImg.png';
+import { fetchStationData } from './pin_Api';
 const { kakao } = window;
 
 function Map() {
@@ -92,10 +93,18 @@ function Map() {
           position: new kakao.maps.LatLng(station.lat, station.lng)
         });
   
-        kakao.maps.event.addListener(marker, 'click', () => {
-          setShowStationDetail(true);
-          setSelectedStation(station);
+        kakao.maps.event.addListener(marker, 'click', async () => {
+
+          const stationId = station.stationId;
+          try {
+            const stationDetails = await fetchStationData(stationId);
+            setSelectedStation(stationDetails);
+            setShowStationDetail(true);
+          } catch (error) {
+            console.error('Error fetching station data:', error);
+          }
         });
+        
   
         return marker;
       });
@@ -147,7 +156,7 @@ function Map() {
       {showStationDetail && (
         <div className='detail-container'>
           <button className='modal' onClick={openModal} style={{ backgroundImage: `url(${upButtonImg})`, left: '350px', top: '660px' }} />
-          <Modal isOpen={isModalOpen} closeModal={closeModal} />
+          <Modal isOpen={isModalOpen} closeModal={closeModal} stationId={selectedStation.stationId} />
           {selectedStation && (
             <>
               {selectedStation.stationId}

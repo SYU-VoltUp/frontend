@@ -14,16 +14,17 @@ class Station {
     this.kindDetail = data.kindDetail;
     this.address = data.address;
     this.lat = data.lat;
-    this.lng = this.lng;
+    this.lng = data.lng;
     this.operator = data.operator;
     this.connectorTypes = data.connectorTypes;
     this.chargers = data.chargers.map(chargerData => new Charger(chargerData));
   }
 }
 
-async function fetchStationData() {
+export async function fetchStationData(stationId) {
   try {
-    const response = await fetch('https://www.syu-voltup.com/v1/stations/ACAC0001');
+    console.log(`StationId: ${stationId}`);
+    const response = await fetch(`https://www.syu-voltup.com/v1/stations/${stationId}`);
     const data = await response.json();
     return new Station(data.data);
   } catch (error) {
@@ -32,4 +33,4 @@ async function fetchStationData() {
   }
 }
 
-export { fetchStationData };
+
