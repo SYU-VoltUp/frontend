@@ -5,7 +5,8 @@ import SearchBox from './SearchBox'; // SearchBox 컴포넌트 임포트
 import axios from 'axios';
 import Modal from './Modal';
 import upButtonImg from '../images/upButtonImg.png';
-import { fetchStationData } from './pin_Api';
+import { fetchStationData } from './DetailApi';
+
 const { kakao } = window;
 
 function Map() {
@@ -22,24 +23,22 @@ function Map() {
   const options = {
     enableHighAccuracy: true,
     timeout: 5000,
-    maximumAge: 0
+    maximumAge: 0,
   };
 
-  // 현재 위치 가져오기
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           setLocation({ lat: position.coords.latitude, lng: position.coords.longitude });
-          console.log("위치 받기 성공");
+          console.log('위치 받기 성공');
         },
-        () => console.log("위치 받기 실패"),
+        () => console.log('위치 받기 실패'),
         options
       );
     }
   }, []);
 
-  // 카카오맵 API 연동 및 렌더링
   useEffect(() => {
     if (location.lat && location.lng) {
       const container = document.getElementById('map');
@@ -47,25 +46,21 @@ function Map() {
       const newMap = new kakao.maps.Map(container, options);
       setMap(newMap);
       fetchStations(newMap);
-      
-      // bounds_changed 이벤트 리스너 추가
+
       kakao.maps.event.addListener(newMap, 'bounds_changed', () => {
         fetchStations(newMap);
       });
     }
   }, [location]);
 
-  // 필터가 변경될 때 마커 갱신
   useEffect(() => {
     if (map) fetchStations(map);
   }, [map, selectedSpeeds, selectedTypes, searchKeyword]);
 
-  // 검색 상태 업데이트 함수
   const handleSearchInputChange = (event) => {
     setSearchKeyword(event.target.value);
   };
 
-  // 검색 제출 함수
   const handleSearchSubmit = (event) => {
     event.preventDefault();
     if (map) fetchStations(map);
@@ -75,7 +70,7 @@ function Map() {
     const bounds = mapInstance.getBounds();
     const swLatLng = bounds.getSouthWest();
     const neLatLng = bounds.getNorthEast();
-    
+
     const params = {
       bounds: `${swLatLng.getLat()},${swLatLng.getLng()},${neLatLng.getLat()},${neLatLng.getLng()}`,
       types: selectedTypes.length ? selectedTypes.join(',') : null,
@@ -84,41 +79,41 @@ function Map() {
     };
     console.log('API 요청 파라미터:', params);
 
-    axios.get('https://www.syu-voltup.com/v1/stations', {params}).then(response => {
-      console.log('API 응답: ', response.data.data);
-      
-      const newMarkers = response.data.data.map(station => {
-        const marker = new kakao.maps.Marker({
-          map: mapInstance,
-          position: new kakao.maps.LatLng(station.lat, station.lng)
-        });
-  
-        kakao.maps.event.addListener(marker, 'click', async () => {
+    axios
+      .get('https://www.syu-voltup.com/v1/stations', { params })
+      .then((response) => {
+        console.log('API 응답: ', response.data.data);
 
-          const stationId = station.stationId;
-          try {
-            const stationDetails = await fetchStationData(stationId);
-            setSelectedStation(stationDetails);
-            setShowStationDetail(true);
-          } catch (error) {
-            console.error('Error fetching station data:', error);
-          }
+        const newMarkers = response.data.data.map((station) => {
+          const marker = new kakao.maps.Marker({
+            map: mapInstance,
+            position: new kakao.maps.LatLng(station.lat, station.lng),
+          });
+
+          kakao.maps.event.addListener(marker, 'click', async () => {
+            const stationId = station.stationId;
+            try {
+              const stationDetails = await fetchStationData(stationId);
+              setSelectedStation(stationDetails);
+              setShowStationDetail(true);
+            } catch (error) {
+              console.error('Error fetching station data:', error);
+            }
+          });
+
+          return marker;
         });
-        
-  
-        return marker;
+        setMarkers((prevMarkers) => {
+          prevMarkers.forEach((marker) => marker.setMap(null));
+          return newMarkers;
+        });
+      })
+      .catch((error) => {
+        setError(error);
+        console.log(error);
       });
-      setMarkers(prevMarkers => {
-        prevMarkers.forEach(marker => marker.setMap(null));
-        return newMarkers;
-      });
-    }).catch(error => {
-      setError(error);
-      console.log(error);
-    });
   };
 
-  // detail 화면 밖 클릭 시 화면 숨기기
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (showStationDetail && !document.querySelector('.detail-container').contains(event.target)) {
@@ -134,7 +129,6 @@ function Map() {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  // Filter 컴포넌트로 전달할 함수
   const handleSpeedChange = (speeds) => {
     setSelectedSpeeds(speeds);
     console.log('선택된 속도:', speeds);
@@ -143,44 +137,46 @@ function Map() {
     setSelectedTypes(types);
     console.log('선택된 커넥터 타입:', types);
   };
-  
+
   return (
-    <div id="map" style={{ width: "393px", height: "852px" }}>
+    <div id="map">
       <LocationBtn onClick={btnOnClick} />
       <Filter onSpeedChange={handleSpeedChange} onConnectorChange={handleConnectorChange} />
-      <SearchBox 
-        value={searchKeyword} 
-        onChange={handleSearchInputChange} 
-        onSubmit={handleSearchSubmit} 
-      />
+      <SearchBox value={searchKeyword} onChange={handleSearchInputChange} onSubmit={handleSearchSubmit} />
       {showStationDetail && (
-        <div className='detail-container'>
-          <button className='modal' onClick={openModal} style={{ backgroundImage: `url(${upButtonImg})`, left: '350px', top: '660px' }} />
+        <div className="detail-container">
+          <button
+            className="modal"
+            onClick={openModal}
+            style={{ backgroundImage: `url(${upButtonImg})`, left: '350px', top: '660px' }}
+          />
           <Modal isOpen={isModalOpen} closeModal={closeModal} stationId={selectedStation.stationId} />
           {selectedStation && (
             <>
-              {selectedStation.stationId}
               <h3 style={{ fontSize: '20px' }}>{selectedStation.name}</h3>
               <div style={{ fontSize: '15px' }}>{selectedStation.address}</div>
-              <div className='connector-container'>
+              <div className="connector-container">
                 {selectedStation.connectorTypes.map((connector, index) => (
-                  <div key={index} className='connector-box'>{connector}</div>
-                ))}
-              </div>
-              <div className='detail'>
-                {selectedStation.chargers && selectedStation.chargers.map((charger, index) => (
-                  <div key={index}>
-                    <div>{charger.chargerType.type}</div>
-                    <div>{charger.output}</div>
+                  <div key={index} className="connector-box">
+                    {connector}
                   </div>
                 ))}
+              </div>
+              <div className="detail">
+                {selectedStation.chargers &&
+                  selectedStation.chargers.map((charger, index) => (
+                    <div key={index}>
+                      <div>{charger.chargerType.type}</div>
+                      <div>{charger.output}</div>
+                    </div>
+                  ))}
               </div>
             </>
           )}
         </div>
       )}
     </div>
-  )
+  );
 }
 
 export default Map;

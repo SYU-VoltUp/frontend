@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import charge_7 from '../../images/charge_7.png';
 import charge_50 from '../../images/charge_50.png';
 import charge_100 from '../../images/charge_100.png';
@@ -29,17 +29,17 @@ function SpeedBtn({ style, onSpeedChange }) {
         onSpeedChange(selectedSpeeds);
     };
 
-    const handleClickOutside = (event) => {
+    const handleClickOutside = useCallback((event) => {
         if (showSpeedOptions && containerRef.current && buttonRef.current &&
             !containerRef.current.contains(event.target) && !buttonRef.current.contains(event.target)) {
             setShowSpeedOptions(false);
         }
-    };
+    }, [showSpeedOptions]);
 
     useEffect(() => {
         document.addEventListener('click', handleClickOutside);
         return () => document.removeEventListener('click', handleClickOutside);
-    }, [showSpeedOptions]);
+    }, [handleClickOutside]);
 
     return (
         <div>

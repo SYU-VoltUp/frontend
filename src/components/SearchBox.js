@@ -2,8 +2,8 @@ import searchImg from '../images/searchImg.png';
 
 function SearchBox({ value, onChange, onSubmit }) {
   return (
-    <div>
-      <form onSubmit={onSubmit} style={{ position: 'fixed', zIndex: '2' }}>
+    <div className="search-container">
+      <form className="search-form" onSubmit={onSubmit}>
         <input
           type='search'
           id="searchInput"

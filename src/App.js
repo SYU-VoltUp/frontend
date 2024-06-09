@@ -1,17 +1,14 @@
 import './App.css';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import Main from './components/Main';
-import ChargingList from './components/ChargingList';
+import Filter from './components/Filter';
+import SearchBox from './components/SearchBox';
+import Map from './components/Map'
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Main />}/>
-          <Route path='/charginglist' element={<ChargingList />}/>
-        </Routes>
-      </BrowserRouter>
+    <div style={{ height: '100vh', width: '100vw', position: 'relative' }}>
+      <Filter/>
+      <SearchBox/>
+      <Map/>
     </div>
   );
 }

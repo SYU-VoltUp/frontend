@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
-import { fetchStationData } from './components/pin_Api.js';
-import PinMap from './components/pin_Map.js';
-import Header from './components/Header.js';
-import goButtonIcon from './images/go_button.svg';
+import { fetchStationData } from './DetailApi.js';
+import DetailMap from './DetailMap.js';
+import Header from './Header.js';
 
-function PinApp({ stationId }) {
+function Detail({ stationId }) {
   const [station, setStation] = useState(null);
 
   useEffect(() => {
@@ -58,13 +57,12 @@ function PinApp({ stationId }) {
         </div>
       ))}
 
-      <img src={goButtonIcon} alt="Go Button" className="go-button" />
       <h2>지도</h2>
       <div id="map-container" style={{ width: '100%', height: '300px', position: 'relative' }}>
-        <PinMap lat={station.lat} lng={station.lng} />
+        <DetailMap lat={station.lat} lng={station.lng} />
       </div>
     </div>
   );
 }
 
-export default PinApp;
+export default Detail;

@@ -1,26 +1,14 @@
 import React from 'react';
 import buttonImg from '../images/buttonImg.png';
-import PinApp from '../PinApp';
+import Detail from './Detail';
 
 function Modal({ isOpen, closeModal, stationId }) {
   return (
     <div style={{ display: isOpen ? "block" : "none" }}>
       <div
         style={{
-          position: 'fixed',
-          top: '0px',
-          left: '0px',
-          width: "100vw",
-          height: "100vh",
-          backgroundColor: "rgba(0, 0, 0, 0.35)",
-          zIndex: "3", // 새로운 스타일 추가: 배경의 zIndex 설정
-          overflow: "auto" // 새로운 스타일 추가: 배경에 스크롤 설정
-        }}
-      />
-      <div
-        style={{
           position: "fixed",
-          top: '20px',
+          top: '0',
           left: '0',
           height: '840px',
           width: '393px',
@@ -31,6 +19,7 @@ function Modal({ isOpen, closeModal, stationId }) {
           padding: "20px"
         }}
       >
+        <Detail stationId={stationId} /> {/* stationId 전달 */}
         <button
           className='modal'
           onClick={closeModal}
@@ -46,7 +35,6 @@ function Modal({ isOpen, closeModal, stationId }) {
             cursor: "pointer"
           }}
         />
-        <PinApp stationId={stationId} /> {/* stationId 전달 */}
       </div>
     </div>
   );

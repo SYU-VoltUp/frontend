@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 function ConnectorTypeBtn({ style, onConnectorChange }) {
     const [showConnectorOptions, setShowConnectorOptions] = useState(false);
@@ -30,16 +30,17 @@ function ConnectorTypeBtn({ style, onConnectorChange }) {
     };
 
     // 화면 밖 클릭 시 화면 숨기기
-    const handleClickOutside = (event) => {
+    const handleClickOutside = useCallback((event) => {
         if (showConnectorOptions && containerRef.current && buttonRef.current &&
             !containerRef.current.contains(event.target) && !buttonRef.current.contains(event.target)) {
             setShowConnectorOptions(false);
         }
-    };
+    }, [showConnectorOptions]);
+
     useEffect(() => {
         document.addEventListener('click', handleClickOutside);
         return () => document.removeEventListener('click', handleClickOutside);
-    }, [showConnectorOptions]);
+    }, [handleClickOutside]);
 
     return (
         <div>

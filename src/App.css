@@ -1,6 +1,9 @@
-.Kakaomap {
-  position: fixed;
-  z-index: 1;
+#map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 .Search {
   position: fixed;
@@ -126,7 +129,7 @@
   color: white;
 }
 .detail-container {
-  position: absolute;
+  position: fixed;
   width: 394px;
   height: 199px;
   top: 653px;

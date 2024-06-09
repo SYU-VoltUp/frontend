@@ -32,5 +32,3 @@ export async function fetchStationData(stationId) {
     throw new Error('API 호출 중 오류 발생');
   }
 }
-
-
