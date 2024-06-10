@@ -1,12 +1,11 @@
-import SpeedBtn from './Filter/SpeedBtn';
-import ConnectorTypeBtn from './Filter/ConnectorTypeBtn';
-import buttonImg from '../images/buttonImg.png'
+import SpeedBtn from './SpeedBtn';
+import ConnectorTypeBtn from './ConnectorTypeBtn';
 
 function Filter({ onSpeedChange, onConnectorChange }) {
     return (
         <div style={{position:'fixed', zIndex:'3', top:'89px'}}>
-            <SpeedBtn style={{position:'fixed', left:'20px', backgroundImage: `url(${buttonImg})`, backgroundPosition: '66px 12px'}} onSpeedChange={onSpeedChange}/>
-            <ConnectorTypeBtn style={{position:'fixed', left:'120px', width:'100px', backgroundImage: `url(${buttonImg})`, backgroundPosition: '83px 12px'}} onConnectorChange={onConnectorChange}/>
+            <SpeedBtn onSpeedChange={onSpeedChange}/>
+            <ConnectorTypeBtn onConnectorChange={onConnectorChange}/>
         </div>
     )
 }

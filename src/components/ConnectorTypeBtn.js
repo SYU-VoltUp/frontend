@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import buttonImg from '../images/buttonImg.png';
 
-function ConnectorTypeBtn({ style, onConnectorChange }) {
+function ConnectorTypeBtn({ className, onConnectorChange }) {
     const [showConnectorOptions, setShowConnectorOptions] = useState(false);
     const [selectedConnectors, setSelectedConnectors] = useState([]);
     const containerRef = useRef(null);
@@ -43,11 +44,11 @@ function ConnectorTypeBtn({ style, onConnectorChange }) {
 
     return (
         <div>
-            <button ref={buttonRef} onClick={handleConnectorBtnClick} className="Button" style={style}>커넥터 타입</button>
+            <button ref={buttonRef} style={{position:'fixed', left:'120px', width:'100px', backgroundImage: `url(${buttonImg})`, backgroundPosition: '83px 12px'}} onClick={handleConnectorBtnClick} className={`Button ${className}`}>커넥터 타입</button>
 
             {showConnectorOptions && (
                 <div ref={containerRef} className='option-container'>
-                    <p style={{ margin: '10px', fontSize: '22px' }}>커넥터 타입을 선택하세요</p>
+                    <p style={{ fontSize: '22px', paddingLeft: '20px'}}>커넥터 타입을 선택하세요</p>
                     <div className="option-row">
                         <button className={`type-button${selectedConnectors.includes('차데모') ? ' selected' : ''}`} onClick={() => handleConnectorOptionClick('차데모')}>차데모</button>
                         <button className={`type-button${selectedConnectors.includes('이동형') ? ' selected' : ''}`} onClick={() => handleConnectorOptionClick('이동형')}>이동형</button>

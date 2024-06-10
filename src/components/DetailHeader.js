@@ -1,6 +1,4 @@
-import bookmarkIcon from '../images/bookmark.svg';
-
-function Header({ station }) {
+function DetailHeader({ station }) {
   const addressClick = () => {
     navigator.clipboard.writeText(station.address).then(() => alert('충전소 주소가 클립보드에 복사되었습니다.')
     ).catch((error) => {
@@ -22,4 +20,4 @@ function Header({ station }) {
   );
 }
 
-export default Header;
+export default DetailHeader;

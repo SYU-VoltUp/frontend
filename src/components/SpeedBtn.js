@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
-import charge_7 from '../../images/charge_7.png';
-import charge_50 from '../../images/charge_50.png';
-import charge_100 from '../../images/charge_100.png';
-import charge_200 from '../../images/charge_200.png';
-import charge_300 from '../../images/charge_300+.png';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import charge_7 from '../images/charge_7.png';
+import charge_50 from '../images/charge_50.png';
+import charge_100 from '../images/charge_100.png';
+import charge_200 from '../images/charge_200.png';
+import charge_300 from '../images/charge_300+.png';
+import buttonImg from '../images/buttonImg.png'
 
 function SpeedBtn({ style, onSpeedChange }) {
     const [showSpeedOptions, setShowSpeedOptions] = useState(false);
@@ -43,12 +44,12 @@ function SpeedBtn({ style, onSpeedChange }) {
 
     return (
         <div>
-            <button ref={buttonRef} onClick={handleSpeedButtonClick} className="Button" style={style}>충전속도</button>
+            <button ref={buttonRef} onClick={handleSpeedButtonClick} className="Button" style={{position:'fixed', left:'20px', backgroundImage: `url(${buttonImg})`, backgroundPosition: '66px 12px'}}>충전속도</button>
 
             {showSpeedOptions && (
                 <div ref={containerRef} className='option-container'>
-                    <p style={{ position: 'fixed', left: '17px', top: '600px', fontSize: '22px' }}>충전속도를 선택하세요</p>
-                    <div className="option-row">
+                    <p style={{ fontSize: '22px', paddingLeft: '20px'}}>충전속도를 선택하세요</p>
+                    <div>
                         <button className={`speed-button${selectedSpeeds.includes(7) ? ' selected' : ''}`} onClick={() => handleSpeedOptionClick(7)} style={{ backgroundImage: `url(${charge_7})`, marginLeft: '13px' }} />
                         <button className={`speed-button${selectedSpeeds.includes(50) ? ' selected' : ''}`} onClick={() => handleSpeedOptionClick(50)} style={{ backgroundImage: `url(${charge_50})` }} />
                         <button className={`speed-button${selectedSpeeds.includes(100) ? ' selected' : ''}`} onClick={() => handleSpeedOptionClick(100)} style={{ backgroundImage: `url(${charge_100})` }} />

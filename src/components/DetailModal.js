@@ -60,7 +60,6 @@ function DetailModal({ stationId, closeModal }) {
         </div>
       ))}
 
-      <br/>
       <h2>지도</h2>
       <div id="map-container">
         <DetailMap lat={station.lat} lng={station.lng} />

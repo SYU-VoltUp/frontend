@@ -1,224 +1,213 @@
-.Kakaomap {
-  position: fixed;
-  z-index: 1;
+#map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
-.Search {
-  position: fixed;
-  z-index: 2;
-  text-align: center;
-  border-style: solid;
-  border-width: thin;
-  border-radius: 10px;
-  width: 349px;
-  height: 45px;
-  margin: 23px 20px;
-  padding: 5px;
-  font-size: 17px;
+
+button {
   border: none;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.search-form {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  position: relative;
+}
+
+.search-container {
+  position: relative;
+  width: 85%;
+  margin-top: 20px;
+}
+
+.search {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 45px;
+  font-size: 17px;
+  text-align: center;
+  border: none;
+  border-radius: 10px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
-.SearchBtn {
-  position: fixed;
+
+.search-btn {
+  position: absolute;
   z-index: 2;
-  margin: 33px 340px;
-  background-position: 10px 5px;
+  top: 10px;
+  right: 15px;
   width: 24px;
-  height: 24px; 
+  height: 24px;
   background-repeat: no-repeat;
   background-color: #FFFFFF;
   background-position: 1px 1px;
-  border: none;
+  background-image: url('./images/searchImg.png');
 }
+
 .Button {
   background-color:white;
   height: 30px; 
   border-radius: 10px;
-  border: none;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   font-size: 14px; 
   background-repeat: no-repeat;
   background-size: 13px;
   padding-right: 20px;
 }
-.box {
-  text-align: center;
-  border-style: solid;
-  border-width: thin;
-  margin-left: 10px;
-  margin-right: 10px;
-  background-color: aquamarine;
-  padding-right: 100px
-}
+
 .Location {
   position: fixed;
   z-index: 2;
   border-radius: 50%;
-  border: none;
   width: 39px;
   height: 39px;
-  left: 344px;
-  top: 786px;
+  right: 20px; 
+  bottom: 20px; 
   background: #FFFFFF;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
 .speed-button {
   width: 62px;
   height: 59px;
-  margin-right: 13px;
-  border: none;
+  margin-right: 15px;
   background-color: white;
 }
+
 .speed-button.selected {
   width: 62px;
   height: 59px;
   margin-right: 13px;
-  border: none;
   background-color: #073DFF;
 }
+
 .type-button {
-  width: 62px;
-  height: 59px;
+  width: 70px;
+  height: 50px;
+  font-size: 17px;
   margin-right: 13px;
-  border: none;
+  border-color:#6787fa;
+  border-radius: 10%;
+  border-style: solid;
   background-color: white;
 }
+
 .type-button.selected {
-  width: 62px;
-  height: 59px;
+  width: 70px;
+  height: 50px;
+  color: white;
+  font-size: 17px;
   margin-right: 13px;
-  border: none;
-  background-color: #073DFF;
+  background-color: #6787fa;
 }
-.option-row {
-  position: fixed;
-  top: 668px;
-}
+
 .option-container {
+  display: flex;
+  flex-direction: column;
   position: fixed;
-  width: 394px;
-  height: 187px;
-  top: 598px;
-  left: 0px;
+  width: 100%;
+  height: 200px;
+  bottom: 67px;
   background-color: white;
   z-index: 3;
 }
+
+.option-row {
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 10px
+}
 .apply-button {
   position: fixed;
-  width: 393px;
+  width: 100%;
   height: 67px;
-  top: 785px;
+  bottom: 0;
   left: 0px;
   background-color:#073DFF;
-  border: none;
   color: white;
 }
-.detail-container {
-  position: absolute;
-  width: 394px;
-  height: 199px;
-  top: 653px;
-  left: 0px;
+
+/* detail */
+.detail {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  width: 100vw;
+  height: auto;
+  bottom: 0;
   padding-left: 15px;
   background-color: white;
   z-index: 3;
 }
-.detail {
-  position: fixed;
-  width: 363px;
-  height: 70px;
-  top: 797px;
-  left: 15px;
-  background-color: #D9D9D9;
-  z-index:3;
+.detail-container {
+  position: relative;
+  z-index: 3;
+  padding-bottom: 3%;
+}
+.open-modal-btn {
+  position: absolute;
+  z-index: 3;
+  right: 15px;
+  top: 22px;
+  background-repeat: no-repeat;
+  background-color: white;
+  width: 30px;
+  height: 30px;
+  background-image: url('./images/upButtonImg.png');
 }
 .connector-container { 
   display: flex;
   flex-wrap: wrap;
-  margin-top: 7px;
+  margin-top: 20px;
 }
 .connector-box {
-  border: none;
-  border-radius: 5px;
-  background-color: #D9D9D9;
-  padding: 3px;
+  flex-shrink: 0;
   margin-right: 10px;
   font-size: 13px;
+  padding: 3px;  
+  border-radius: 5px;
+  background-color: #D9D9D9;
 }
-.modal {
-  border: none;
-  position: fixed; 
-  left: 350px;
-  top: 30px;
+
+/* DetailModal.js의 css */
+.detail-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 4;
+  background-color: white;
+  overflow-y: auto;
+  padding: 20px
+}
+.header-container {
+  display: flex;
+}
+.close-modal {
+  background-image: url('./images/buttonImg.png');
+  margin-left: 10px;
+  margin-top: 24px;
   width: 20px;
   height: 20px;
   background-repeat: no-repeat;
-  background-color: white;
-  margin-top: 10px;
 }
-
-
-/* pin_App.css */
 .buttons {
   display: flex;
   align-items: center;
 }
 
-.header-bottom-line {
-  width: 100%; /* 헤더의 가로 크기에 맞게 설정 */
-  height: 1px;
-  background: #D0D0D0;
-  position: fixed; /* 헤더 아래에 고정됩니다. */
-  top: 50px; /* 헤더의 아래쪽에 위치하도록 조정하세요. */
-}
-
-/* 본문 스타일 */
-
-.main-content {
-  margin-top: 90px; /* 헤더의 높이만큼 여백 추가 */
-}
-
-.map {
-  width: 393px;
-  height: 852px;
-}
-
-/* 충전기 정보 스타일 */
-
-.charger-info {
-  display: flex;
-}
-
-.output,
-.type {
-  width: 108px;
-  height: 23px;
-  flex-shrink: 0;
-}
-
-.output {
-  color: #000;
-  font-family: 'Inter', sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-}
-
-.type {
-  color: #8C8C8C;
-  font-family: 'Inter', sans-serif;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
 /* 충전기 박스 스타일 */
-
 .charging-box-category {
   margin-bottom: 20px; /* 카테고리 간의 간격 조정 */
-  display: flex; 
-  flex-wrap: wrap;
 }
 
 .charging-boxes {
@@ -235,88 +224,84 @@
 }
 
 .charger-id {
-  font-size: 50px;
-  font-weight: 700;
+  width: 121px;
+  height: 60px;
+  flex-shrink: 0;
   color: #777;
-  line-height: 94px;
+  font-family: Inter;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
   text-align: center;
 }
 
-/* Go 버튼 스타일 */
-.go-button {
-  position: absolute; /* 절대 위치로 설정 */
-  z-index: 1000; /* 지도 위에 나타나도록 z-index 설정 */
-  bottom: 20px; /* 원하는 위치를 위해 조정 */
-  right: 20px; /* 원하는 위치를 위해 조정 */
-  width: 50px; /* 버튼 크기 조정 */
-  height: 50px; /* 버튼 크기 조정 */
-  background-color: transparent; /* 버튼 배경을 투명하게 설정 */
-  border-radius: 50%; /* 버튼을 동그란 모양으로 설정 */
+.charging-box {
+  width: 175px;
+  height: 94px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: #EBEBEB;
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.go-button img {
-  width: 100%; /* 이미지를 버튼 크기에 맞게 조정 */
-  height: 100%; /* 이미지를 버튼 크기에 맞게 조정 */
-  display: block; /* 이미지를 블록 요소로 설정하여 여백 제거 */
+.map-container {
+  width: 100%;
+  height: 300px;
+  position: relative;
 }
 
-
-/* pinApp.css */
-button {
-  border: none; /* 테두리 제거 */
-  padding: 0; /* 내부 여백 제거 */
-  background: none; /* 배경 제거 */
-  cursor: pointer; /* 커서를 포인터로 변경 */
-}
-
+/* 코드에서 사용되지 않는 class던데 지워도 되는지
 .header-bottom-line {
   width: 100%;
   height: 1px;
-  background-color: #D0D0D0; /* 회색 선(#D0D0D0)을 지정합니다. */
+  background-color: #D0D0D0;
 }
-
-.go-button {
-  position: fixed;
-  bottom: 77px;
-  right: 40px;
-  width: 80px;
-  height: 78.613px;
+.type {
+  color: #8C8C8C;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.output {
+  color: #000;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.type {
+  width: 108px;
+  height: 23px;
   flex-shrink: 0;
 }
+.charger-info {
+  display: flex;
+}
+.map {
+  width: 393px;
+  height: 852px;
+}
+.main-content {
+  margin-top: 90px;
+}
 
-.go-button-icon {
+
+.close-button {
+  margin-right: 15px;
+}
+.header-bottom-line {
   width: 100%;
-  height: 100%;
-  fill: #FFF;
+  height: 1px;
+  background: #D0D0D0;
+  position: fixed;
+  top: 50px;
 }
 
-/* styles.css */
-.charging-stations {
-display: flex;
-flex-wrap: wrap;
-}
-
-.charging-box {
-width: 175px;
-height: 94px;
-flex-shrink: 0;
-border-radius: 8px;
-background: #EBEBEB;
-margin: 5px;
-display: flex;
-align-items: center;
-justify-content: center;
-}
-
-.charger-id {
-width: 121px;
-height: 60px;
-flex-shrink: 0;
-color: #777;
-font-family: Inter;
-font-size: 50px;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
-text-align: center;
-}
+*/
