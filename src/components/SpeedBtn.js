@@ -6,7 +6,7 @@ import charge_200 from '../images/charge_200.png';
 import charge_300 from '../images/charge_300+.png';
 import buttonImg from '../images/buttonImg.png'
 
-function SpeedBtn({ style, onSpeedChange }) {
+function SpeedBtn({ onSpeedChange }) {
     const [showSpeedOptions, setShowSpeedOptions] = useState(false);
     const [selectedSpeeds, setSelectedSpeeds] = useState([]);
     const containerRef = useRef(null);
@@ -44,7 +44,7 @@ function SpeedBtn({ style, onSpeedChange }) {
 
     return (
         <div>
-            <button ref={buttonRef} onClick={handleSpeedButtonClick} className="Button" style={{position:'fixed', left:'20px', backgroundImage: `url(${buttonImg})`, backgroundPosition: '66px 12px'}}>충전속도</button>
+            <button ref={buttonRef} onClick={handleSpeedButtonClick} className="Button" style={{position:'fixed', left:'20px', backgroundImage: `url(${buttonImg})`, backgroundPosition: '60px 12px'}}>충전속도</button>
 
             {showSpeedOptions && (
                 <div ref={containerRef} className='option-container'>

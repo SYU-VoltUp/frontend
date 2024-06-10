@@ -1,11 +1,14 @@
 import './App.css';
-import Main from './components/Main';
-import ChargingList from './components/ChargingList';
+import Filter from './components/Filter';
+import SearchBox from './components/SearchBox';
+import Kakaomap from './components/Kakaomap';
 
 function App() {
   return (
-    <div className="App">
-      <Main/>
+    <div style={{height: '100%', width: '100%', position:'relative'}}>
+      <Filter />
+      <SearchBox />
+      <Kakaomap />
     </div>
   );
 }
