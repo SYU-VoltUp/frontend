@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from 'react';
+import '../App.css'; // ensure global styles are applied
 
 function DetailMap({ lat, lng }) {
   const mapContainerRef = useRef(null);
+  const mapRef = useRef(null);
 
   useEffect(() => {
     const loadMapScript = () => {
@@ -27,19 +29,46 @@ function DetailMap({ lat, lng }) {
           mapTypeId: window.kakao.maps.MapTypeId.HYBRID,
         };
         const map = new window.kakao.maps.Map(mapContainerRef.current, options);
+        mapRef.current = map;
 
         const markerPosition = new window.kakao.maps.LatLng(lat, lng);
         const marker = new window.kakao.maps.Marker({
           position: markerPosition,
         });
         marker.setMap(map);
+
+        // Ensure map relayout after a short delay
+        setTimeout(() => {
+          map.relayout();
+          map.setCenter(new window.kakao.maps.LatLng(lat, lng)); // Re-center the map
+        }, 100);
       }
     };
 
     loadMapScript();
   }, [lat, lng]);
 
-  return <div ref={mapContainerRef} style={{ width: '100%', height: '400px' }}></div>;
+  // Function to resize and relayout the map
+  const resizeAndRelayoutMap = () => {
+    if (mapContainerRef.current && mapRef.current) {
+      mapContainerRef.current.style.width = '100%';
+      mapContainerRef.current.style.height = '300px';
+      mapRef.current.relayout();
+      mapRef.current.setCenter(new window.kakao.maps.LatLng(lat, lng)); // Re-center the map
+    }
+  };
+
+  useEffect(() => {
+    // Resize and relayout the map whenever lat/lng changes
+    resizeAndRelayoutMap();
+  }, [lat, lng]);
+
+  return (
+    <div 
+      ref={mapContainerRef} 
+      className="map-container"
+    ></div>
+  );
 }
 
 export default DetailMap;

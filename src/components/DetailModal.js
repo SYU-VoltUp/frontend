@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { fetchStationData } from './DetailApi.js';
 import DetailMap from './DetailMap.js';
-import DetailHeader from './DetailHeader.js';  // 'Header'로 수정
+import DetailHeader from './DetailHeader.js';
 
 function DetailModal({ stationId, closeModal }) {
   const [station, setStation] = useState(null);
+  const modalRef = useRef(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -18,6 +19,11 @@ function DetailModal({ stationId, closeModal }) {
 
     if (stationId) {
       fetchData();
+    }
+
+    // 모달이 열릴 때 포커스 설정
+    if (modalRef.current) {
+      modalRef.current.focus();
     }
   }, [stationId]);
 
@@ -40,30 +46,31 @@ function DetailModal({ stationId, closeModal }) {
   }, []);
 
   return (
-    <div className='detail-modal'>
+    <div className='detail-modal' ref={modalRef} tabIndex="-1">
       <div className='header-container'>
         <DetailHeader station={station} />
-        <button className='close-modal' onClick={closeModal} />
+        <button className='close-modal' onClick={closeModal}></button>
       </div>
-      <hr />
-      <h3>충전기 정보</h3>
-      {chargersByCategory.map((category, index) => (
-        <div key={index} className="charging-box-category">
-          <li className="charger-output">속도: {category.output}</li>
-          <li className="charger-type">커넥터 타입: {category.type}</li><br />
-          <div className="charging-boxes" style={{ display: 'flex', flexWrap: 'wrap' }}>
-            {category.chargers.map((charger, chargerIndex) => (
-              <div key={chargerIndex} className="charging-box" style={{ width: '175px', height: '94px', margin: '5px', backgroundColor: '#EBEBEB', borderRadius: '8px' }}>
-                <p className="charger-id" style={{ fontSize: '50px', fontWeight: '700', color: '#777', lineHeight: '94px', textAlign: 'center' }}>{charger.chargerId.split('-')[1]}</p>
-              </div>
-            ))}
-          </div><br /><hr />
+      <div className='content-container'>
+        <hr />
+        <h3>충전기 정보</h3>
+        {chargersByCategory.map((category, index) => (
+          <div key={index} className="charging-box-category">
+            <li className="charger-output">속도: {category.output}</li>
+            <li className="charger-type">커넥터 타입: {category.type}</li><br />
+            <div className="charging-boxes">
+              {category.chargers.map((charger, chargerIndex) => (
+                <div key={chargerIndex} className="charging-box">
+                  <p className="charger-id">{charger.chargerId.split('-')[1]}</p>
+                </div>
+              ))}
+            </div><br /><hr />
+          </div>
+        ))}
+        <h2>지도</h2>
+        <div id="map-container" className="map-container">
+          <DetailMap lat={station.lat} lng={station.lng} />
         </div>
-      ))}
-
-      <h2>지도</h2>
-      <div id="map-container" style={{ width: '100%', height: '300px', position: 'relative' }}>
-        <DetailMap lat={station.lat} lng={station.lng} />
       </div>
     </div>
   );
